@@ -138,6 +138,7 @@ public class Utils {
 	public static String convertISOPatternToJavaFormatPattern(String pattern) {
 		if(pattern.contains("T") && !pattern.contains("'T'")) pattern = pattern.replace("T", "'T'");
 		if(pattern.contains("Z") && !pattern.contains("'Z'")) pattern = pattern.replace("Z", "'Z'");
+        if(pattern.contains(" ")) pattern = pattern.replace(" ", "+");
 		pattern = pattern.replace("YYYY", "yyyy").replace("DD", "dd").replace("hh", "HH");
 		return pattern;
 	}
