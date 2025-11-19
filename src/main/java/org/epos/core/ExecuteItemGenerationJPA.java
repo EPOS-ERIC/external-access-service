@@ -120,7 +120,8 @@ public class ExecuteItemGenerationJPA {
 									if (mp.getProperty() != null && mp.getValuePattern() != null) {
 										if (mp.getProperty().equals("schema:startDate") || mp.getProperty().equals("schema:endDate")) {
 											try {
-												sp.setValue(Utils.convertDateUsingPattern(params.get(mp.getVariable()).getAsString(), null, mp.getValuePattern()));
+                                                String newDateParam = params.get(mp.getVariable()).getAsString().split(" ")[0];
+												sp.setValue(Utils.convertDateUsingPattern(newDateParam, null, mp.getValuePattern()));
 											} catch (ParseException e) {
 												LOGGER.error(e.getLocalizedMessage());
 											}
