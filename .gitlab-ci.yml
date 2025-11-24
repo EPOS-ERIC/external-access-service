@@ -31,6 +31,9 @@ deploy:
       - target/*.jar
 
 docker-build:
+  services:
+    - docker:dind
+  image: docker:27.5.1
   stage: package
   script:
    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
