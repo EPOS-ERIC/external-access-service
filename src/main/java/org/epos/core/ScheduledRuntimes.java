@@ -27,7 +27,7 @@ public class ScheduledRuntimes {
 	@Async
 	public void connectionsUpdater() {
 		LOGGER.info("[Scheduled Task - Resources] Updating resources information");
-		EposDataModelDAO.clearAllCaches();
+		EposDataModelDAO.getInstance().clearAllCaches();
         LOGGER.info("[Scheduled Task - Resources] Resources successfully updated");
 	}
 
