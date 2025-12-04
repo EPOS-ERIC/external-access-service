@@ -42,17 +42,27 @@ jobs:
       # OWASP Dependency-Check - Software Composition Analysis (SCA)
       - name: OWASP Dependency-Check
         uses: dependency-check/Dependency-Check_Action@main
+        id: depcheck
         with:
           project: ${{ github.event.repository.name }}
           path: '.'
           format: 'HTML,SARIF'
           out: 'reports'
+          args: >
+            --failOnCVSS 7
 
-      - name: Upload OWASP report
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Upload OWASP HTML report
+        uses: actions/upload-artifact@v4
         if: always()
         with:
-          sarif_file: reports/dependency-check-report.sarif
+          name: dependency-check-report
+          path: ${{ github.workspace }}/reports
+
+      - name: Upload OWASP SARIF report
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && hashFiles('reports/dependency-check-report.sarif') != ''
+        with:
+          sarif_file: ${{ github.workspace }}/reports/dependency-check-report.sarif
 
   build:
     runs-on: ubuntu-latest
