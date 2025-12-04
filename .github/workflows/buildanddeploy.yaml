@@ -54,4 +54,4 @@ jobs:
       - name: Mirror to GitLab
         run: |
           git remote add remote-repo https://github:${{ secrets.GITLAB }}@epos-ci.brgm.fr/epos/${{ github.event.repository.name }}.git
-          git push remote-repo ${{ github.ref }}
+          git push --force --follow-tags  remote-repo ${{ github.ref }}
