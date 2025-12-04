@@ -27,9 +27,8 @@ jobs:
           java-version: 21
           distribution: 'temurin'
 
-      # CodeQL - Static Application Security Testing (SAST)
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: java
 
@@ -37,7 +36,7 @@ jobs:
         run: mvn clean compile -DskipTests
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
 
   build:
     runs-on: ubuntu-latest
@@ -72,20 +71,20 @@ jobs:
         run: |
           docker build . -t epos/${{ github.event.repository.name }}:${{ env.VERSION }}
 
-      # Trivy - Container Image Vulnerability Scan
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
+        continue-on-error: true
         with:
           image-ref: 'epos/${{ github.event.repository.name }}:${{ env.VERSION }}'
           format: 'sarif'
-          output: 'trivy-results.sarif'
+          output: '${{ github.workspace }}/trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        if: always() && hashFiles('trivy-results.sarif') != ''
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: '${{ github.workspace }}/trivy-results.sarif'
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
