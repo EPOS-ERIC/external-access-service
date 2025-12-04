@@ -1,25 +1,26 @@
 # Stage 1: Build a minimal custom JRE
 FROM amazoncorretto:21-alpine-jdk AS builder
 
+# Required for --strip-debug to work on Alpine
+RUN apk add --no-cache binutils
+
 WORKDIR /app
 COPY target/*.jar app.jar
 
-# First, find required modules for your app
-RUN jar --file=app.jar --describe-module || true
-
-# Create a minimal custom JRE (JDK 21+ uses different compress syntax)
-RUN jlink \
-    --add-modules java.base,java.logging,java.sql,java.naming,java.management,java.security.jgss,java.instrument,java.net.http \
+# Build small JRE image
+RUN $JAVA_HOME/bin/jlink \
+    --verbose \
+    --add-modules java.base,java.management,java.naming,java.net.http,java.security.jgss,java.security.sasl,java.sql,jdk.httpserver,jdk.unsupported \
     --strip-debug \
-    --compress=zip-6 \
-    --no-header-files \
     --no-man-pages \
+    --no-header-files \
+    --compress=zip-6 \
     --output /custom-jre
 
 # Stage 2: Runtime image
 FROM alpine:3.20
 
-RUN apk --no-cache add ca-certificates tzdata curl \
+RUN apk add --no-cache ca-certificates tzdata curl \
     && addgroup -g 1001 -S appgroup \
     && adduser -u 1001 -S appuser -G appgroup
 
@@ -28,8 +29,7 @@ WORKDIR /app
 COPY --from=builder --chown=appuser:appgroup /app/app.jar app.jar
 
 ENV JAVA_HOME=/opt/java \
-    PATH="/opt/java/bin:$PATH" \
-    JAVA_OPTS=""
+    PATH="/opt/java/bin:$PATH"
 
 USER appuser:appgroup
 EXPOSE 8080
@@ -37,4 +37,4 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:8080/actuator/health || exit 1
 
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
