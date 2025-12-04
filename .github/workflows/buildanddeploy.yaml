@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jar-artifact
-          path: ${{ github.workspace }}/${{ github.event.repository.name }}/target/*.jar
+          path: ${{ github.workspace }}/target/*.jar
           retention-days: 1
 
       - name: Docker build
