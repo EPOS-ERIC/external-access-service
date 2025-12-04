@@ -59,20 +59,24 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Run Dependency-Check
-        uses: dependency-check/Dependency-Check_Action@v4.1.0
+        uses: dependency-check/Dependency-Check_Action@main
+        id: depcheck
         env:
-          JAVA_HOME: ""  # Prevent host Java path conflicts
+          JAVA_HOME: /opt/jdk  # Reset to match the Docker image
         with:
           project: ${{ github.event.repository.name }}
           path: '.'
           format: 'SARIF'
           out: 'reports'
+          args: >
+            --failOnCVSS 7
+            --enableRetired
 
       - name: Upload Dependency-Check results
         uses: github/codeql-action/upload-sarif@v4
-        if: always() && hashFiles('reports/dependency-check-report.sarif') != ''
+        if: always()
         with:
-          sarif_file: reports/dependency-check-report.sarif
+          sarif_file: reports/
 
   build:
     runs-on: ubuntu-latest
