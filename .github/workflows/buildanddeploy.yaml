@@ -5,13 +5,59 @@ on:
       - main
     tags:
       - '*'
+  pull_request:
+    branches:
+      - main
 
 env:
   VERSION: ${{ github.ref_type == 'tag' && github.ref_name || 'latest' }}
 
 jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      # CodeQL - Static Application Security Testing (SAST)
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java
+
+      - name: Build for CodeQL
+        run: mvn clean compile -DskipTests
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+      # OWASP Dependency-Check - Software Composition Analysis (SCA)
+      - name: OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: ${{ github.event.repository.name }}
+          path: '.'
+          format: 'HTML,SARIF'
+          out: 'reports'
+
+      - name: Upload OWASP report
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: reports/dependency-check-report.sarif
+
   build:
     runs-on: ubuntu-latest
+    needs: security-scan
+    if: github.event_name == 'push'
     permissions: write-all
     steps:
       - uses: actions/checkout@v4
@@ -41,6 +87,21 @@ jobs:
         run: |
           docker build . -t epos/${{ github.event.repository.name }}:${{ env.VERSION }}
 
+      # Trivy - Container Image Vulnerability Scan
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'epos/${{ github.event.repository.name }}:${{ env.VERSION }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
@@ -54,4 +115,4 @@ jobs:
       - name: Mirror to GitLab
         run: |
           git remote add remote-repo https://github:${{ secrets.GITLAB }}@epos-ci.brgm.fr/epos/${{ github.event.repository.name }}.git
-          git push --force --follow-tags  remote-repo ${{ github.ref }}
+          git push --force remote-repo ${{ github.ref }}
