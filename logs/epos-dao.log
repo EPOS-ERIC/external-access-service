@@ -1,29 +1,79 @@
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - *********** convert *********
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - 2025-11-19T11:34:05 01:00 yyyy-MM-ddThh:mm:ssZ yyyy-MM-ddThh:mm:ssZ
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05 01:00"
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - false
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - yyyy-MM-dd'T'HH:mm:ss'Z'
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - *********** end convert *********
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05 01:00"
-2025-11-19 11:48:42 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05 01:00"
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - *********** convert *********
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - 2025-11-19T11:34:05+01:00 yyyy-MM-ddThh:mm:ssZ yyyy-MM-ddThh:mm:ssZ
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05+01:00"
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - false
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - yyyy-MM-dd'T'HH:mm:ss'Z'
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - *********** end convert *********
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05+01:00"
-2025-11-19 11:49:14 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05+01:00"
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - *********** convert *********
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - 2025-11-19T11:34:05+01:00 yyyy-MM-ddThh:mm:ssZ yyyy-MM-ddThh:mm:ssZ
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05+01:00"
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - false
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - yyyy-MM-dd'T'HH:mm:ss'Z'
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - *********** end convert *********
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05+01:00"
-2025-11-19 11:52:57 [main] WARN  org.epos.api.utility.Utils - Error parsing date Unparseable date: "2025-11-19T11:34:05+01:00"
-2025-11-19 11:53:23 [main] WARN  org.epos.api.utility.Utils - *********** convert *********
-2025-11-19 11:53:23 [main] WARN  org.epos.api.utility.Utils - 2025-11-19T11:34:05+01:00 yyyy-MM-ddThh:mm:ssXXX yyyy-MM-ddThh:mm:ssXXX
-2025-11-19 11:53:23 [main] WARN  org.epos.api.utility.Utils - true
-2025-11-19 11:53:23 [main] WARN  org.epos.api.utility.Utils - yyyy-MM-dd'T'HH:mm:ssXXX
-2025-11-19 11:53:23 [main] WARN  org.epos.api.utility.Utils - *********** end convert *********
+2025-12-12 15:58:33 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-12-12 15:58:33 [main] INFO  org.epos.Swagger2SpringBoot - Starting Swagger2SpringBoot using Java 21.0.8 with PID 33864 (/home/valerio/Documenti/services/external-access-service/target/classes started by valerio in /home/valerio/Documenti/services/external-access-service)
+2025-12-12 15:58:33 [main] INFO  org.epos.Swagger2SpringBoot - No active profile set, falling back to 1 default profile: "default"
+2025-12-12 15:58:35 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-12 15:58:35 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-12 15:58:35 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-12 15:58:35 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.49]
+2025-12-12 15:58:35 [main] INFO  o.a.c.c.C.[.[.[/api/external-access-service/v1] - Initializing Spring embedded WebApplicationContext
+2025-12-12 15:58:35 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1628 ms
+2025-12-12 15:58:35 [main] INFO  org.epos.core.ScheduledRuntimes - [External Service Startup] -----------------------------------------------
+2025-12-12 15:58:35 [main] INFO  org.epos.core.ScheduledRuntimes - [StartUp Task - Resources] Updating facets information
+2025-12-12 15:58:35 [main] INFO  org.epos.core.ScheduledRuntimes - [Scheduled Task - Resources] Updating resources information
+2025-12-12 15:58:35 [main] ERROR o.e.h.d.service.EntityManagerService - Failed to build dynamic JDBC URL: Cannot invoke "String.contains(java.lang.CharSequence)" because "host" is null
+2025-12-12 15:58:35 [main] WARN  o.e.h.d.service.EntityManagerService - Using fallback JDBC URL: jdbc:postgresql://null/null
+2025-12-12 15:58:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - metadata_catalogue - Starting...
+2025-12-12 15:58:44 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'scheduledRuntimes': Invocation of init method failed
+2025-12-12 15:58:44 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-12-12 15:58:44 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-12 15:58:44 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'scheduledRuntimes': Invocation of init method failed
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1818)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.epos.Swagger2SpringBoot.main(Swagger2SpringBoot.java:50)
+Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: The connection attempt failed.
+	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:605)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:592)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:101)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:80)
+	at org.epos.handler.dbapi.service.EntityManagerService.<init>(EntityManagerService.java:107)
+	at org.epos.handler.dbapi.service.EntityManagerService$EntityManagerServiceBuilder.build(EntityManagerService.java:418)
+	at dao.EposDataModelDAO.<init>(EposDataModelDAO.java:87)
+	at dao.EposDataModelDAO.getInstance(EposDataModelDAO.java:99)
+	at org.epos.core.ScheduledRuntimes.connectionsUpdater(ScheduledRuntimes.java:30)
+	at org.epos.core.ScheduledRuntimes.onStartup(ScheduledRuntimes.java:21)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:401)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:219)
+	... 18 common frames omitted
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:364)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
+	at org.postgresql.Driver.makeConnection(Driver.java:446)
+	at org.postgresql.Driver.connect(Driver.java:298)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:122)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:368)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:483)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
+	... 31 common frames omitted
+Caused by: java.net.UnknownHostException: null
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:260)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:121)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:140)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:268)
+	... 40 common frames omitted
