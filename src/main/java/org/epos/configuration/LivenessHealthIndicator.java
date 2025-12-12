@@ -16,20 +16,15 @@ public class LivenessHealthIndicator implements HealthIndicator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LivenessHealthIndicator.class);
 
-    @Autowired
-    private static RpcRouter router;
+    private final RpcRouter router;
 
-    static {
-        try {
-            router.init(System.getenv("BROKER_HOST"), System.getenv("BROKER_VHOST"), System.getenv("BROKER_USERNAME"),
-                    System.getenv("BROKER_PASSWORD"));
-        } catch (RoutingException e) {
-            LOGGER.error("A problem was encountered whilst initialising the routing framework.", e);
-        }
+    public LivenessHealthIndicator(RpcRouter router) {
+        this.router = router;
     }
 
     @Override
     public Health health() {
+
         try {
             if(!router.doHealthCheck()){
                 return Health.down().withDetail("No Router Connection", 1).build();
