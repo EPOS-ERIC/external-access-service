@@ -9,6 +9,7 @@ import org.epos.api.beans.Distribution;
 import org.epos.api.beans.ErrorMessage;
 import org.epos.api.utility.Utils;
 import org.epos.core.ExecuteItemGenerationJPA;
+import org.epos.core.ExecuteItemGenerationSQL;
 import org.epos.core.ExternalAccessHandler;
 import org.epos.router_framework.types.ServiceType;
 import org.slf4j.Logger;
@@ -92,7 +93,7 @@ public class GetoriginalurlApiController extends ApiController implements Getori
 
 	private ResponseEntity<String> redirectRequest(ServiceType service, Map<String, Object> requestParams) {
 		
-		Distribution response = ExecuteItemGenerationJPA.generate(requestParams);
+		Distribution response = ExecuteItemGenerationSQL.generate(requestParams);
 
 		Map<String,Object> handlerResponse = ExternalAccessHandler.handle(response, "getoriginalurl", null, requestParams);
 

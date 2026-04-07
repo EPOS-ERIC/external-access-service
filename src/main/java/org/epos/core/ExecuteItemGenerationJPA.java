@@ -18,7 +18,7 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+@Deprecated
 public class ExecuteItemGenerationJPA {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExecuteItemGenerationJPA.class);

@@ -18,6 +18,7 @@ import org.epos.api.beans.Distribution;
 import org.epos.api.beans.ErrorMessage;
 import org.epos.api.utility.Utils;
 import org.epos.core.ExecuteItemGenerationJPA;
+import org.epos.core.ExecuteItemGenerationSQL;
 import org.epos.core.ExternalAccessHandler;
 import org.epos.router_framework.domain.Actor;
 import org.epos.router_framework.domain.BuiltInActorType;
@@ -180,7 +181,7 @@ public class ExecuteApiController extends ApiController implements ExecuteApi {
 
 	private ResponseEntity<String> redirectRequest(Map<String, Object> requestParams) {
 
-		Distribution response = ExecuteItemGenerationJPA.generate(requestParams);
+		Distribution response = ExecuteItemGenerationSQL.generate(requestParams);
 		Response conversionResponse = null;
 
 		JsonObject conversion = null;

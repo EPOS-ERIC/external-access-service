@@ -153,7 +153,7 @@ public class Utils {
 			dateConverted = Float.toString(fromDateToDecimalYear(new SimpleDateFormat("yyyy-MM-dd").parse(dateString)));
 		} else if(inputFormat.equals("YYYY.yyy")) {
 			dateConverted = fromDecimalYearToDate(Float.parseFloat(dateString));
-		}
+		} 
 		else {
 			if(!isValidFormat(convertISOPatternToJavaFormatPattern(inputFormat), dateString)) {
 				inputFormat = EPOSINTERNALFORMAT;
