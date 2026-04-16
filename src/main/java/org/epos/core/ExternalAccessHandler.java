@@ -143,8 +143,14 @@ public class ExternalAccessHandler {
 
 					return responseMap; 
                 } catch (Exception ex) {
-                    LOGGER.error(ex.toString());
-                    LOGGER.error("No Conversion parameter provided, sending back a 503 message");
+                    LOGGER.error(
+                            "Error while executing service. compiledUrl={}, kind={}, requestParams={}, conversion={}",
+                            compiledUrl,
+                            kind,
+                            requestParams,
+                            conversion,
+                            ex);
+					ex.printStackTrace();
                     responseMap.put("httpStatusCode", "503");
                     return responseMap;
                 }
