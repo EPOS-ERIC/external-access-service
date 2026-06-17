@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.epos.api.beans.Distribution;
 import org.epos.api.beans.ServiceParameter;
@@ -20,6 +21,7 @@ public class ExternalAccessHandler {
 	public static Map<String, Object> handle(Distribution distr, String kind, JsonObject conversion, Map<String, Object> requestParams) {
 		
 		List<ServiceParameter> distParams = distr.getParameters();
+        AtomicBoolean isAuthPlain = new AtomicBoolean(false);
 		if (distParams == null) {
 			LOGGER.error("No distribution parameters provided");
 		}
@@ -55,6 +57,7 @@ public class ExternalAccessHandler {
             distr.getParameters().forEach(p -> {
                 if (p.getProperty() != null && p.getProperty().equals("epos:header")) { //HEADER
                     headerParameters.put(p.getName(), p.getDefaultValue());
+                    isAuthPlain.set(true);
                 }
                 if (p.getValue() != null && !p.getValue().isEmpty())
                     parameters.put(p.getName(), p.getValue());
@@ -106,7 +109,7 @@ public class ExternalAccessHandler {
         }
 
 
-		 if ((requestParams.containsKey("format") && checkFormat(requestParams.get("format").toString(), compiledUrl.contains("WFS"))) || requestParams.containsKey("pluginId")) {
+		 if ((requestParams.containsKey("format") && checkFormat(requestParams.get("format").toString(), compiledUrl.contains("WFS"))) || requestParams.containsKey("pluginId") || isAuthPlain.get()) {
 			LOGGER.debug("Direct request");
             if (conversion == null) {
                 LOGGER.debug("Is native GeoJSON or CovJSON");
