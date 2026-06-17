@@ -53,6 +53,9 @@ public class ExternalAccessHandler {
 
         if (distr.getParameters() != null) {
             distr.getParameters().forEach(p -> {
+                if (p.getProperty() != null && p.getProperty().equals("epos:header")) { //HEADER
+                    headerParameters.put(p.getName(), p.getDefaultValue());
+                }
                 if (p.getValue() != null && !p.getValue().isEmpty())
                     parameters.put(p.getName(), p.getValue());
                 if (p.getDefaultValue() != null && p.getValue() == null && p.isRequired())
@@ -67,9 +70,6 @@ public class ExternalAccessHandler {
                             parameters.remove(p.getName());
                             parameters.put(p.getName(), requestParams.get("format").toString());
                         }
-                        if (p.getProperty() != null && p.getProperty().equals("schema:encodingFormat")) { //HEADER
-                            headerParameters.put(p.getName(), requestParams.get("format").toString());
-                        }
                     }
                 }
             }
@@ -80,13 +80,11 @@ public class ExternalAccessHandler {
                             parameters.remove(p.getName());
                             parameters.put(p.getName(), requestParams.get("format").toString());
                         }
-                        if (p.getProperty() != null && p.getProperty().equals("schema:encodingFormat")) { //HEADER
-                            headerParameters.put(p.getName(), requestParams.get("format").toString());
-                        }
                     }
                 }
             }
         }
+
 
         String compiledUrl = URLGeneration.generateURLFromTemplateAndMap(distr.getEndpoint(), parameters);
         try {
