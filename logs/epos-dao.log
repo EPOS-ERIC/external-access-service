@@ -77,3 +77,14 @@ Caused by: java.net.UnknownHostException: null
 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:140)
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:268)
 	... 40 common frames omitted
+2026-06-17 14:25:44 [main] ERROR org.epos.core.ExternalAccessHandler - No Type parameter provided, sending back a 503 message
+2026-06-17 14:26:04 [main] ERROR org.epos.core.ExternalAccessHandler - No Type parameter provided, sending back a 503 message
+2026-06-17 14:28:00 [main] INFO  org.epos.core.URLGeneration - TEMPLATE: https://api-test.georoc.eu/api/v1/queries/sites
+2026-06-17 14:28:00 [main] ERROR org.epos.core.ExternalAccessHandler - Found the following issue whilst executing the WFS Checker, issue raised java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1 - Continuing execution
+2026-06-17 14:28:00 [main] INFO  o.epos.core.ExternalServicesRequest - Requesting payload for URL -> https://api-test.georoc.eu/api/v1/queries/sites
+2026-06-17 14:28:28 [main] INFO  org.epos.core.URLGeneration - TEMPLATE: https://api-test.georoc.eu/api/v1/queries/sites
+2026-06-17 14:28:28 [main] ERROR org.epos.core.ExternalAccessHandler - Found the following issue whilst executing the WFS Checker, issue raised java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1 - Continuing execution
+2026-06-17 14:28:28 [main] INFO  o.epos.core.ExternalServicesRequest - Requesting payload for URL -> https://api-test.georoc.eu/api/v1/queries/sites
+2026-06-17 14:29:09 [main] INFO  org.epos.core.URLGeneration - TEMPLATE: https://api-test.georoc.eu/api/v1/queries/sites
+2026-06-17 14:29:09 [main] ERROR org.epos.core.ExternalAccessHandler - Found the following issue whilst executing the WFS Checker, issue raised java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1 - Continuing execution
+2026-06-17 14:29:10 [main] INFO  o.epos.core.ExternalServicesRequest - Requesting payload for URL -> https://api-test.georoc.eu/api/v1/queries/sites

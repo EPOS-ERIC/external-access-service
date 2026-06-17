@@ -95,6 +95,11 @@ public class ExternalServicesRequest {
 		Request.Builder request = new Request.Builder()
 				.url(url);
 
+
+		for(String key : headerParameters.keySet()) {
+			request.addHeader(key, headerParameters.get(key).toString());
+		}
+
 		try (Response response = CLIENT.newCall(request.build()).execute()) {
 			assert response.body() != null;
 			return response.body().string();

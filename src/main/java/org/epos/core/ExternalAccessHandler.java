@@ -18,6 +18,26 @@ public class ExternalAccessHandler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExternalAccessHandler.class);
 
+//    public static void main(String[] args){
+//        Distribution distr = new Distribution();
+//        distr.setEndpoint("https://api-test.georoc.eu/api/v1/queries/sites");
+//        distr.setType("WEB_SERVICE");
+//
+//        List<ServiceParameter> parameters = distr.getParameters();
+//        ServiceParameter param = new ServiceParameter();
+//        param.setDefaultValue("Sy5HSVVMSUFDQ0k6U3k1SFNWVk1TVUZEUTBsZlJFbEhTVk5mUVZCSlh6RTNOamt3T0RNeE5qQT0=");
+//        param.setName("DIGIS-API-ACCESSKEY");
+//        param.setRequired(false);
+//        param.setProperty("epos:header");
+//        param.setValue("Sy5HSVVMSUFDQ0k6U3k1SFNWVk1TVUZEUTBsZlJFbEhTVk5mUVZCSlh6RTNOamt3T0RNeE5qQT0=");
+//        param.setType("xsd:string");
+//        parameters.add(param);
+//
+//        Map<String, Object> requestParams = new HashMap<>();
+//        requestParams.put("DIGIS-API-ACCESSKEY", "Sy5HSVVMSUFDQ0k6U3k1SFNWVk1TVUZEUTBsZlJFbEhTVk5mUVZCSlh6RTNOamt3T0RNeE5qQT0=");
+//        System.out.println(handle(distr, "get", null, requestParams));
+//    }
+
 	public static Map<String, Object> handle(Distribution distr, String kind, JsonObject conversion, Map<String, Object> requestParams) {
 		
 		List<ServiceParameter> distParams = distr.getParameters();
