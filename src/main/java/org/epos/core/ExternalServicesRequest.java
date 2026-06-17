@@ -89,6 +89,31 @@ public class ExternalServicesRequest {
 			} 
 		}
 	}
+
+	public String requestPayloadWithHeader(String url, HashMap<String, Object> headerParameters) throws IOException {
+		LOGGER.info("Requesting payload for URL -> "+url);
+		Request.Builder request = new Request.Builder()
+				.url(url);
+
+		try (Response response = CLIENT.newCall(request.build()).execute()) {
+			assert response.body() != null;
+			return response.body().string();
+		} catch(javax.net.ssl.SSLPeerUnverifiedException e) {
+			LOGGER.error("Error on requesting payload for URL: "+url+" cause: "+e.getLocalizedMessage());
+			request = new Request.Builder()
+					.url(url.replace("https://", "https://www."));
+
+			for(String key : headerParameters.keySet()) {
+				request.addHeader(key, headerParameters.get(key).toString());
+			}
+
+					//.build();
+			try (Response response = CLIENT.newCall(request.build()).execute()) {
+				assert response.body() != null;
+				return response.body().string();
+			}
+		}
+	}
 	
 	public String requestPayloadUsingHttpsURLConnection(String url) throws IOException {
 	    LOGGER.info("Requesting payload for URL -> " + url);

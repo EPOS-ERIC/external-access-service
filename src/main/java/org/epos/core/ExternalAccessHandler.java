@@ -33,6 +33,7 @@ public class ExternalAccessHandler {
 
         Map<String, Object> responseMap = new HashMap<>();
         HashMap<String, Object> parameters = new HashMap<>();
+        HashMap<String, Object> headerParameters = new HashMap<>();
 
 		if (distr.getType().equals("DOWNLOADABLE_FILE")) {
 			try {
@@ -66,6 +67,9 @@ public class ExternalAccessHandler {
                             parameters.remove(p.getName());
                             parameters.put(p.getName(), requestParams.get("format").toString());
                         }
+                        if (p.getProperty() != null && p.getProperty().equals("schema:encodingFormat")) { //HEADER
+                            headerParameters.put(p.getName(), requestParams.get("format").toString());
+                        }
                     }
                 }
             }
@@ -75,6 +79,9 @@ public class ExternalAccessHandler {
                         if (p.getProperty() != null && p.getProperty().equals("schema:encodingFormat")) {
                             parameters.remove(p.getName());
                             parameters.put(p.getName(), requestParams.get("format").toString());
+                        }
+                        if (p.getProperty() != null && p.getProperty().equals("schema:encodingFormat")) { //HEADER
+                            headerParameters.put(p.getName(), requestParams.get("format").toString());
                         }
                     }
                 }
@@ -106,7 +113,7 @@ public class ExternalAccessHandler {
             if (conversion == null) {
                 LOGGER.debug("Is native GeoJSON or CovJSON");
                 try {
-                    String responsePayload = ExternalServicesRequest.getInstance().requestPayload(compiledUrl);
+                    String responsePayload = ExternalServicesRequest.getInstance().requestPayloadWithHeader(compiledUrl, headerParameters);
                     responseMap.put("content", responsePayload.isEmpty() ? "{}" : responsePayload);
                 } catch (IOException e) {
                     LOGGER.error(e.toString());
@@ -138,7 +145,8 @@ public class ExternalAccessHandler {
 					}
 					parametersMap.put("responseContentType", conversion.has("responseContentType") ? conversion.get("responseContentType").getAsString() : null);					//parametersMap.put("responseContentType", conversion.get("responseContentType").getAsString());
 					responseMap.put("parameters", parametersMap);
-					String responsePayload = ExternalServicesRequest.getInstance().requestPayload(compiledUrl);
+                    responseMap.put("headerParameters", headerParameters);
+					String responsePayload = ExternalServicesRequest.getInstance().requestPayloadWithHeader(compiledUrl, headerParameters);
 					responseMap.put("content", responsePayload.length()==0? "{}" : responsePayload);
 
 					return responseMap; 
