@@ -267,6 +267,46 @@ public class ExternalServicesRequest {
 			} 
 		}
 	}
+
+	public Map<String, Object> getRedirectWithHeader(String url, HashMap<String, Object> headerParameters) throws IOException {
+		LOGGER.info("Requesting redirect for URL -> "+url);
+		Request.Builder request = new Request.Builder()
+				.url(url);
+
+		for(String key : headerParameters.keySet()) {
+			request.addHeader(key, headerParameters.get(key).toString());
+		}
+
+		try (Response response = CLIENT.newCall(request.build()).execute()) {
+			LOGGER.info("Response: "+response.toString());
+
+			Map<String, Object> responseMap = new HashMap<>();
+			assert response.body() != null;
+			String contentType = Objects.requireNonNull(response.body().contentType()).toString();
+			String httpStatusCode = Integer.toString(response.code());
+
+			responseMap.put("content-type", contentType);
+			responseMap.put("httpStatusCode", httpStatusCode);
+			responseMap.put("redirect-url", url);
+			return responseMap;
+		} catch(javax.net.ssl.SSLPeerUnverifiedException e) {
+			LOGGER.error("Error on requesting redirect for URL: "+url+" cause: "+e.getLocalizedMessage());
+			request = new Request.Builder()
+					.url(url.replace("https://", "https://www."));
+
+			try (Response response = CLIENT.newCall(request.build()).execute()) {
+				Map<String, Object> responseMap = new HashMap<>();
+				assert response.body() != null;
+				String contentType = Objects.requireNonNull(response.body().contentType()).toString();
+				String httpStatusCode = Integer.toString(response.code());
+
+				responseMap.put("content-type", contentType);
+				responseMap.put("httpStatusCode", httpStatusCode);
+				responseMap.put("redirect-url", url);
+				return responseMap;
+			}
+		}
+	}
 	
 	/*
 	 * SSL Context

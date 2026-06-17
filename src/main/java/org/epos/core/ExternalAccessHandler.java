@@ -164,7 +164,7 @@ public class ExternalAccessHandler {
         } else {
             LOGGER.debug("Redirect");
             try {
-                return ExternalServicesRequest.getInstance().getRedirect(compiledUrl);
+                return ExternalServicesRequest.getInstance().getRedirectWithHeader(compiledUrl, headerParameters);
             } catch (Exception ex) {
                 LOGGER.error("Issue raised " + ex.toString() + " sending back a 503 message");
                 responseMap.put("httpStatusCode", "503");
