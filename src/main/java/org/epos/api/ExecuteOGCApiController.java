@@ -177,6 +177,7 @@ public class ExecuteOGCApiController extends ApiController implements ExecuteOGC
 							.body(Utils.gson.toJsonTree(errorMessage).toString());
 				}
 
+				httpHeaders = new HttpHeaders();
 				httpHeaders.add("Location", redirectUrl);
 				httpHeaders.add("content-type", contentType);
 				return ResponseEntity.status(HttpStatus.FOUND)
